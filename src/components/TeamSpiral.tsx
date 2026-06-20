@@ -13,7 +13,7 @@ if (typeof window !== "undefined") {
 const teamMembers = [
   { 
     name: "韩曼莉", 
-    title: "高级合伙人", 
+    title: "瀛和家族财富传承中心主任", 
     desc: "家业传承财富中心主任，专注财富规划与传承、家事治理、私人法律顾问。",
     img: "/assets/han-manli-red.webp",
     id: "han"

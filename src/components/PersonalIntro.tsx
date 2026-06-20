@@ -71,12 +71,12 @@ export default function PersonalIntro() {
           <div className="intro-content">
             <h2 className="font-sans text-[12px] font-semibold tracking-[0.2em] text-[#775a19] uppercase mb-3">瀛和家族财富传承中心主任</h2>
             <h3 className="font-serif text-[40px] md:text-[48px] text-[#1a1c1c] mb-6 leading-[1.2]">
-              韩曼莉 <span className="text-[24px] text-[#4e4639] font-normal ml-2">高级合伙人</span>
+              韩曼莉
             </h3>
             
             <div className="space-y-6 text-[#1a1c1c] font-sans text-[16px] md:text-[18px] leading-[1.6] mb-10">
               <p>
-                北京瀛和（广州）律师事务所高级合伙人，广东省律师协会信托与财富管理专委会副主任。团队深入研究中国家族（企业）成长模式、私人财富管理与传承等理论与实务，并从文化、治理和成员关系的视角关注民营家族企业的代际传承。
+                广东省律师协会信托与财富管理专委会副主任。团队深入研究中国家族（企业）成长模式、私人财富管理与传承等理论与实务，并从文化、治理和成员关系的视角关注民营家族企业的代际传承。
               </p>
               <p className="text-[#4e4639] italic border-l-2 border-[#c5a059] pl-4">
                 原创“人财保传”理论体系，“人+财+文化”三维传承模型。其中，A类特殊人群项目荣获中国政法大学产品大赛提名奖及新则标杆案例奖等荣誉。

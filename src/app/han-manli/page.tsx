@@ -72,7 +72,7 @@ export default function HanManliPage() {
               家族财富传承与家事治理的长期主义实践者
             </h1>
             <p className="text-[18px] text-[#4e4639] leading-[1.6] mb-8">
-              北京瀛和（广州）律师事务所高级合伙人、家业传承财富中心主理人。专注财富规划与传承、家事治理、私人法律顾问、家族企业治理与复杂争议解决。
+              家业传承财富中心主理人。专注财富规划与传承、家事治理、私人法律顾问、家族企业治理与复杂争议解决。
             </p>
             <div className="flex flex-wrap gap-4">
               <a href="/certificates" className="bg-[#775a19] text-white px-8 py-4 rounded-full font-sans text-[12px] font-semibold uppercase tracking-wider hover:scale-105 shadow-md hover:shadow-xl transition-all">

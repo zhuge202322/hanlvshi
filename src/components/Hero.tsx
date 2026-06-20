@@ -43,7 +43,7 @@ export default function Hero() {
             韩曼莉
           </h1>
           <h2 className="hero-reveal font-serif text-[32px] text-[#c5a059] mb-8 max-w-xl">
-            高级合伙人 / 瀛和家族财富传承中心主任
+            瀛和家族财富传承中心主任
           </h2>
           
           <div className="flex flex-wrap gap-12 mb-12">
