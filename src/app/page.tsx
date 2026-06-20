@@ -13,7 +13,6 @@ export default function Home() {
       <section className="py-4 bg-white border-y border-[#dadada]">
         <div className="max-w-[1280px] mx-auto px-6 lg:px-16 flex flex-wrap justify-center gap-8">
           <a href="/product" className="text-[14px] text-[#1a1c1c] hover:text-[#775a19] font-semibold transition-colors">家事服务</a>
-          <a href="/private-service" className="text-[14px] text-[#1a1c1c] hover:text-[#775a19] font-semibold transition-colors">私人定制服务</a>
           <a href="/product" className="text-[14px] text-[#1a1c1c] hover:text-[#775a19] font-semibold transition-colors">A类人群人财保传</a>
           <a href="/certificates" className="text-[14px] text-[#1a1c1c] hover:text-[#775a19] font-semibold transition-colors">证书完整展示</a>
           <a href="/han-manli#cases" className="text-[14px] text-[#1a1c1c] hover:text-[#775a19] font-semibold transition-colors">案例</a>
