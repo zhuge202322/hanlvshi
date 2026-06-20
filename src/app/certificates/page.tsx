@@ -131,30 +131,35 @@ export default function CertificatesPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {appointments.map((cert, i) => (
-              <article key={i} className="certificate-card glass-card rounded-[1.5rem] overflow-hidden group cursor-pointer">
-                <div className="relative h-[280px] overflow-hidden bg-white">
-                  <img 
-                    src={cert.thumb} 
-                    alt={cert.title}
-                    className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <a 
-                    href={cert.file} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm text-[#1a1c1c] px-4 py-2 rounded-full text-[12px] font-semibold flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white"
-                  >
-                    查看原件 <ExternalLink className="w-3 h-3" />
-                  </a>
-                </div>
-                <div className="p-6">
-                  <p className="text-[12px] text-[#775a19] font-semibold mb-2">{cert.date}</p>
-                  <h4 className="text-[18px] text-[#1a1c1c] font-serif leading-[1.3]">{cert.title}</h4>
-                </div>
-              </article>
-            ))}
+            {appointments.map((cert, i) => {
+              // 需要旋转的图片文件名
+              const needsRotation = ['appointments-23.webp', 'appointments-13.webp', 'appointments-11.webp'].some(name => cert.thumb.includes(name));
+              
+              return (
+                <article key={i} className="certificate-card glass-card rounded-[1.5rem] overflow-hidden group cursor-pointer">
+                  <div className="relative h-[280px] overflow-hidden bg-white">
+                    <img 
+                      src={cert.thumb} 
+                      alt={cert.title}
+                      className={`w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-500 ${needsRotation ? 'rotate-90' : ''}`}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <a 
+                      href={cert.file} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm text-[#1a1c1c] px-4 py-2 rounded-full text-[12px] font-semibold flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-white"
+                    >
+                      查看原件 <ExternalLink className="w-3 h-3" />
+                    </a>
+                  </div>
+                  <div className="p-6">
+                    <p className="text-[12px] text-[#775a19] font-semibold mb-2">{cert.date}</p>
+                    <h4 className="text-[18px] text-[#1a1c1c] font-serif leading-[1.3]">{cert.title}</h4>
+                  </div>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
