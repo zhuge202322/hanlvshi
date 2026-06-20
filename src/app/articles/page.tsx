@@ -1,34 +1,16 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import Navigation from "@/components/Navigation";
-import { ChevronDown, ChevronUp } from "lucide-react";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
 export const dynamic = 'force-dynamic';
-
-const mainArticle = {
-  date: "2026年3月24日",
-  category: "广州女律师领导力高级研修班学习心得",
-  title: "律路繁花映初心，刚柔并济启新程",
-  content: [
-    "春意渐浓，万物竞发。在这充满生机的时节，我有幸参与广州女律师领导力高级研修班并顺利结业。这段时光，既是一次知识的充电、思维的碰撞，更是一场心灵的洗礼、初心的回望。",
-    "研修班走进重庆多家标杆律所，探寻其发展背后的底层逻辑：从顶层架构搭建到核心资源配置，从人才引进培养到专业能力赋能，每一处细节都藏着行业发展的智慧与规律。",
-    "多家优秀律所均将党建工作与律所管理、业务发展深度融合，通过党支部建设凝聚团队力量，通过党员先锋岗引领专业精进，形成\"党建强、业务兴\"的良性循环。",
-    "作为家族传承中心负责人、律所党支部书记与管委会成员，我更加明确：党建工作不是独立的支线任务，而是律所发展的红色引擎。家族传承中心的发展，同样需要党建引领。",
-    "在女性领导力课程中，我对女性律师的专业力量有了更深理解。女性领导力的核心，在于刚柔并济的平衡、多元包容的思维、温润坚定的力量。这种力量用于家族传承服务时，既能坚守原则、严谨务实，也能理解客户的情感需求。",
-    "人工智能、大数据等技术正在改变法律服务行业。从文书起草、案例检索到客户分析、业务拓展，技术赋能让法律服务的效率与质量提升，也要求律师团队持续更新服务方式。",
-    "回顾十九年的律途思考，我将其归纳为\"选择、平衡、专注\"。从财富传承领域的深耕，到非遗咏春的研习，再到律所党建工作的推进，每一次选择都锚定法治初心，每一次平衡都兼顾责任与担当。",
-    "作为家族传承中心负责人，我们不仅提供财富传承、家族治理的专业方案，更传递对家庭责任、亲情守护与文化传承的价值理念。尤其在特殊人群监护、医疗预嘱、意定监护等领域，我们用专业法律知识为客户的人生全旅程提供保障。",
-    "未来，我将继续以党建为魂、以专业为基、以女性力量为翼，带领家族传承中心完善服务体系，为大湾区家族客户提供更专业、更全面、更有温度的财富传承与家族治理解决方案。"
-  ]
-};
 
 const otherArticles = [
   {
@@ -60,12 +42,28 @@ const otherArticles = [
     category: "继承法",
     title: "遗嘱效力争议：如何避免\"一纸遗嘱\"引发家族纷争",
     excerpt: "通过典型案例分析遗嘱无效的常见原因，提供遗嘱起草、见证、保管及执行的全流程专业建议，确保遗愿得以实现。"
+  },
+  {
+    date: "2026年3月24日",
+    category: "女律师领导力",
+    title: "律路繁花映初心，刚柔并济启新程",
+    excerpt: "参与广州女律师领导力高级研修班的学习心得。探讨女性律师的专业力量、党建引领下的律所发展，以及如何在财富传承领域发挥刚柔并济的领导力。",
+    fullContent: [
+      "春意渐浓，万物竞发。在这充满生机的时节，我有幸参与广州女律师领导力高级研修班并顺利结业。这段时光，既是一次知识的充电、思维的碰撞，更是一场心灵的洗礼、初心的回望。",
+      "研修班走进重庆多家标杆律所，探寻其发展背后的底层逻辑：从顶层架构搭建到核心资源配置，从人才引进培养到专业能力赋能，每一处细节都藏着行业发展的智慧与规律。",
+      "多家优秀律所均将党建工作与律所管理、业务发展深度融合，通过党支部建设凝聚团队力量，通过党员先锋岗引领专业精进，形成\"党建强、业务兴\"的良性循环。",
+      "作为家族传承中心负责人、律所党支部书记与管委会成员，我更加明确：党建工作不是独立的支线任务，而是律所发展的红色引擎。家族传承中心的发展，同样需要党建引领。",
+      "在女性领导力课程中，我对女性律师的专业力量有了更深理解。女性领导力的核心，在于刚柔并济的平衡、多元包容的思维、温润坚定的力量。这种力量用于家族传承服务时，既能坚守原则、严谨务实，也能理解客户的情感需求。",
+      "人工智能、大数据等技术正在改变法律服务行业。从文书起草、案例检索到客户分析、业务拓展，技术赋能让法律服务的效率与质量提升，也要求律师团队持续更新服务方式。",
+      "回顾十九年的律途思考，我将其归纳为\"选择、平衡、专注\"。从财富传承领域的深耕，到非遗咏春的研习，再到律所党建工作的推进，每一次选择都锚定法治初心，每一次平衡都兼顾责任与担当。",
+      "作为家族传承中心负责人，我们不仅提供财富传承、家族治理的专业方案，更传递对家庭责任、亲情守护与文化传承的价值理念。尤其在特殊人群监护、医疗预嘱、意定监护等领域，我们用专业法律知识为客户的人生全旅程提供保障。",
+      "未来，我将继续以党建为魂、以专业为基、以女性力量为翼，带领家族传承中心完善服务体系，为大湾区家族客户提供更专业、更全面、更有温度的财富传承与家族治理解决方案。"
+    ]
   }
 ];
 
 export default function ArticlesPage() {
   const container = useRef<HTMLDivElement>(null);
-  const [expanded, setExpanded] = useState(false);
 
   useGSAP(() => {
     gsap.fromTo(
@@ -113,48 +111,11 @@ export default function ArticlesPage() {
         </div>
       </section>
 
-      {/* Main Article */}
+      {/* Articles Grid */}
       <section className="section py-[120px]">
-        <div className="max-w-[900px] mx-auto px-6 lg:px-16">
-          <article className="glass-card p-12 rounded-[1.5rem]">
-            <div className="mb-8">
-              <p className="text-[14px] text-[#775a19] font-semibold mb-2">
-                {mainArticle.date} · {mainArticle.category}
-              </p>
-              <h2 className="font-serif text-[40px] text-[#1a1c1c] leading-[1.2]">
-                {mainArticle.title}
-              </h2>
-            </div>
-
-            <div className="space-y-6 text-[16px] text-[#4e4639] leading-[1.8]">
-              {mainArticle.content.slice(0, expanded ? mainArticle.content.length : 3).map((para, i) => (
-                <p key={i}>{para}</p>
-              ))}
-            </div>
-
-            <button
-              onClick={() => setExpanded(!expanded)}
-              className="mt-8 flex items-center gap-2 text-[14px] text-[#775a19] font-semibold hover:text-[#1a1c1c] transition-colors"
-            >
-              {expanded ? (
-                <>
-                  收起全文 <ChevronUp className="w-4 h-4" />
-                </>
-              ) : (
-                <>
-                  展开阅读全文 <ChevronDown className="w-4 h-4" />
-                </>
-              )}
-            </button>
-          </article>
-        </div>
-      </section>
-
-      {/* Other Articles */}
-      <section className="section py-[120px] bg-white">
         <div className="max-w-[1280px] mx-auto px-6 lg:px-16">
           <div className="mb-12">
-            <h2 className="font-sans text-[12px] font-semibold tracking-[0.2em] text-[#775a19] uppercase mb-3">更多文章</h2>
+            <h2 className="font-sans text-[12px] font-semibold tracking-[0.2em] text-[#775a19] uppercase mb-3">专业文章</h2>
             <h3 className="font-serif text-[40px] md:text-[48px] text-[#1a1c1c] leading-[1.2]">专业观点与实务分享</h3>
           </div>
 
