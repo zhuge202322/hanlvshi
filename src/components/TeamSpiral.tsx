@@ -50,154 +50,85 @@ const teamMembers = [
 
 export default function TeamSpiral() {
   const container = useRef<HTMLDivElement>(null);
-  const spiralRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
     const cards = gsap.utils.toArray(".team-card") as HTMLElement[];
-    let currentIndex = 0;
-    let hoveredIndex = -1;
     
-    // ===== 布局核心参数 =====
-    const yOffset = 160;     // 每张卡片垂直向下的间距
-    const xOffset = 120;     // 每张卡片水平向右的间距
-    const zOffset = 250;     // 每张卡片向后的景深间距 (Z轴)
-    const rotYOffset = 15;   // 围绕 Y 轴旋转的角度，产生透视阶梯感
-
-    // 1. 初始位置设置：将所有卡片绝对定位在正中央
-    cards.forEach((card) => {
-      gsap.set(card, {
-        transformOrigin: "center center",
-        xPercent: -50, // 配合 left-1/2 实现居中
-      });
-    });
-
-    // 2. 核心更新函数：根据进度重新计算每张卡片的位置
-    const updateCards = (progress: number) => {
-      // 计算当前"激活"的卡片索引（带小数的连续值）
-      currentIndex = progress * (cards.length - 1);
-      
-      cards.forEach((card, i) => {
-        // 计算当前卡片相对于"激活点"的距离
-        const relIndex = i - currentIndex;
-        
-        let targetX = relIndex * xOffset;
-        let targetY = relIndex * yOffset;
-        let targetZ = -relIndex * zOffset;
-        let targetRotY = relIndex * rotYOffset;
-        
-        // 越靠后的卡片透明度越低
-        let opacity = 1 - Math.abs(relIndex) * 0.3;
-        
-        // 【关键】当卡片被往上滚过（relIndex < 0）时，让它向左上方飞出并迅速透明消失
-        if (relIndex < 0) {
-          targetY = relIndex * yOffset * 1.5;
-          targetX = relIndex * xOffset * 1.5;
-          opacity = 1 - Math.abs(relIndex) * 1.5;
-        }
-
-        if (hoveredIndex === i) {
-          // 【悬停状态】：抵消所有倾斜，强制正面停留
-          gsap.to(card, {
-            x: targetX,
-            y: targetY,
-            z: targetZ + 50, // 稍微往前突起一点
-            rotationY: 0,    // 强制正面显示
-            opacity: Math.max(0.2, opacity + 0.2), // 稍微提亮
-            scale: 1.05,
-            duration: 0.4,
-            ease: "power2.out",
-            overwrite: "auto"
-          });
-        } else {
-          // 【正常滚动状态】
-          gsap.to(card, {
-            x: targetX,
-            y: targetY,
-            z: targetZ,
-            rotationY: targetRotY,
-            opacity: Math.max(0, opacity),
-            scale: 1,
-            duration: 0.1, // 短过渡让 scrub 显得平滑
-            ease: "none",
-            overwrite: "auto"
-          });
-        }
-      });
-    };
-
-    // 初始渲染一次，把卡片摆放到位
-    updateCards(0);
-
-    // 3. 绑定滚动事件
-    ScrollTrigger.create({
-      id: "team-scroll",
-      trigger: container.current,
-      start: "top top",
-      // 滚动距离根据卡片数量动态决定
-      end: `+=${cards.length * 400}`,
-      scrub: 1, // scrub = 1 提供带阻尼的平滑缓动
-      pin: true, // 固定外层容器
-      onUpdate: (self) => {
-        updateCards(self.progress);
+    // 简单的渐入动画
+    gsap.fromTo(
+      cards,
+      { y: 50, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: container.current,
+          start: "top 80%",
+        },
       }
-    });
-
-    // 4. 绑定鼠标悬停事件
-    cards.forEach((card, i) => {
-      card.addEventListener("mouseenter", () => {
-        hoveredIndex = i;
-        // 鼠标进入时触发一次重绘
-        updateCards(ScrollTrigger.getById("team-scroll")?.progress || (currentIndex / (cards.length - 1)) || 0);
-      });
-      
-      card.addEventListener("mouseleave", () => {
-        hoveredIndex = -1;
-        // 鼠标离开时恢复正常滚动排布
-        updateCards(ScrollTrigger.getById("team-scroll")?.progress || (currentIndex / (cards.length - 1)) || 0);
-      });
-    });
-
+    );
   }, { scope: container });
 
   return (
-    // 外层容器：占满屏幕
-    <section className="bg-[#f3f3f3] relative overflow-hidden h-screen" ref={container}>
-      
-      {/* 标题区域：固定在顶部 */}
-      <div className="max-w-[1280px] mx-auto px-6 lg:px-16 pt-[120px] pb-6 relative z-10 text-center pointer-events-none">
-        <h2 className="text-[12px] font-semibold tracking-[0.2em] text-[#775a19] uppercase mb-3">精英汇聚</h2>
-        <h3 className="text-[40px] md:text-[48px] text-[#1a1c1c] mb-6 leading-[1.2] font-serif">核心团队</h3>
-        <p className="text-[18px] text-[#4e4639] max-w-2xl mx-auto leading-[1.6]">
-          汇聚业界精英，以集体智慧为您提供坚实的法律后盾。
-        </p>
-      </div>
+    <section className="py-[120px] bg-white" ref={container}>
+      <div className="max-w-[1280px] mx-auto px-6 lg:px-16">
+        <div className="text-center mb-16">
+          <span className="font-sans text-[12px] font-semibold text-[#775a19] tracking-[0.4em] mb-4 block uppercase">
+            核心团队
+          </span>
+          <h2 className="font-serif text-[42px] md:text-[52px] text-[#1a1c1c] mb-6">
+            专业律师团队
+          </h2>
+          <p className="text-[18px] text-[#4e4639] max-w-2xl mx-auto">
+            以韩曼莉律师为核心，汇聚多领域专业律师，为您提供全方位法律服务
+          </p>
+        </div>
 
-      {/* 3D 动画容器 */}
-      <div className="relative w-full h-full flex justify-center items-start mt-8 perspective-[1200px]">
-        <div ref={spiralRef} className="relative w-full transform-style-3d will-change-transform">
-          
-          {teamMembers.map((member, i) => (
+        {/* 团队卡片网格 */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {teamMembers.map((member) => (
             <a
-              key={i}
+              key={member.id}
               href={`/team?lawyer=${member.id}`}
-              className="team-card absolute top-0 left-1/2 w-80 md:w-96 glass-card backdrop-blur-xl border border-white/20 p-10 rounded-[1.5rem] flex flex-col items-center text-center cursor-pointer shadow-2xl hover:shadow-3xl transition-shadow"
-              style={{ transformOrigin: "center center" }}
+              className="team-card group block"
             >
-              {/* 头像 */}
-              <div className="w-24 h-24 rounded-full bg-[#eeeeee] mb-6 border-4 border-white shadow-md overflow-hidden">
-                <img 
-                  src={member.img} 
-                  alt={member.name}
-                  className="w-full h-full object-cover"
-                />
+              <div className="bg-white rounded-[1.5rem] overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 border border-[#dadada]/30 hover:border-[#775a19]/30 hover:-translate-y-2">
+                {/* 图片区域 */}
+                <div className="relative h-[320px] overflow-hidden">
+                  <img
+                    src={member.img}
+                    alt={member.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                  <div className="absolute bottom-6 left-6 right-6">
+                    <h3 className="font-serif text-[28px] text-white mb-1">
+                      {member.name}
+                    </h3>
+                    <p className="text-[14px] text-white/90 font-medium">
+                      {member.title}
+                    </p>
+                  </div>
+                </div>
+
+                {/* 描述区域 */}
+                <div className="p-6">
+                  <p className="text-[15px] text-[#4e4639] leading-relaxed">
+                    {member.desc}
+                  </p>
+                  <div className="mt-4 flex items-center text-[#775a19] font-semibold text-[14px] group-hover:translate-x-2 transition-transform duration-300">
+                    <span>查看详情</span>
+                    <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </div>
               </div>
-              {/* 信息 */}
-              <h4 className="text-[24px] text-[#1a1c1c] mb-2 font-serif">{member.name}</h4>
-              <h5 className="text-[14px] font-semibold text-[#c5a059] uppercase tracking-wider mb-4">{member.title}</h5>
-              <p className="text-[16px] text-[#4e4639] leading-[1.6]">{member.desc}</p>
             </a>
           ))}
-
         </div>
       </div>
     </section>
