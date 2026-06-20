@@ -66,7 +66,7 @@ export default function Hero() {
               className="bg-[#775a19] text-white px-8 py-4 rounded-full font-sans text-[12px] font-semibold uppercase tracking-wider hover:scale-105 shadow-md hover:shadow-xl transition-all flex items-center gap-2" 
               href="tel:02087077500"
             >
-              <Phone className="w-4 h-4" /> 免费咨询
+              <Phone className="w-4 h-4" /> 在线咨询
             </a>
             <a href="/certificates" className="border border-[#7f7667] text-[#1a1c1c] px-8 py-4 rounded-full font-sans text-[12px] font-semibold uppercase tracking-wider hover:bg-black/5 transition-all">
               查看资质
