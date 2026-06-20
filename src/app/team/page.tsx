@@ -11,9 +11,6 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-// 动态渲染配置
-export const dynamic = 'force-dynamic';
-
 // 团队律师数据
 const teamLawyers = {
   han: {
@@ -108,7 +105,10 @@ const teamLawyers = {
   }
 };
 
-export default function TeamPage() {
+type TeamLawyers = typeof teamLawyers;
+
+// 使用 useSearchParams 的内部组件
+function TeamPageContent({ teamLawyers }: { teamLawyers: TeamLawyers }) {
   const container = useRef<HTMLDivElement>(null);
   const searchParams = useSearchParams();
   const [activeLawyer, setActiveLawyer] = useState("han");
@@ -132,7 +132,6 @@ export default function TeamPage() {
 
   return (
     <main className="bg-[#f9f9f9] min-h-screen" ref={container}>
-      <Navigation />
 
       {/* Hero Section */}
       <section className="relative min-h-[70vh] flex items-center pt-20 bg-white overflow-hidden">
@@ -248,5 +247,24 @@ export default function TeamPage() {
         <p className="text-sm">本网站内容仅作团队与服务介绍，不构成具体法律意见。</p>
       </footer>
     </main>
+  );
+}
+
+// 主导出组件 - 使用 Suspense 包裹
+export default function TeamPage() {
+  return (
+    <>
+      <Navigation />
+      <Suspense fallback={
+        <div className="min-h-screen bg-[#f9f9f9] flex items-center justify-center">
+          <div className="text-center">
+            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#775a19]"></div>
+            <p className="mt-4 text-[#4e4639]">加载中...</p>
+          </div>
+        </div>
+      }>
+        <TeamPageContent teamLawyers={teamLawyers} />
+      </Suspense>
+    </>
   );
 }
