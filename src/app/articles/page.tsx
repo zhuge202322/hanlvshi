@@ -11,6 +11,8 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+export const dynamic = 'force-dynamic';
+
 const mainArticle = {
   date: "2026年3月24日",
   category: "广州女律师领导力高级研修班学习心得",

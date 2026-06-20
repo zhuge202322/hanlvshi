@@ -11,6 +11,8 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+export const dynamic = 'force-dynamic';
+
 export default function ProductPage() {
   const container = useRef<HTMLDivElement>(null);
 

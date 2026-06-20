@@ -11,6 +11,8 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
+export const dynamic = 'force-dynamic';
+
 const honors = [
   { date: "2026.02", title: "市调解协会颁发金牌调解员", thumb: "/assets/cert-thumbs/honors-29.webp", file: "/public-docs/honors/honors-29-202602-市调解协会颁发金牌调解员.pdf" },
   { date: "2025.12", title: "消费者权益保护荣誉", thumb: "/assets/cert-thumbs/honors-28.webp", file: "/public-docs/honors/honors-28-202512-消费者.pdf" },
